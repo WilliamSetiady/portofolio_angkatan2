@@ -10,7 +10,7 @@ $siswa = [
         "nama" => "Set",
         "umur" => 23,
         "jurusan" => "Junior Web Programming",
-        "status" => 1,
+        "status" => 0,
     ],
 ];
 
@@ -19,7 +19,7 @@ function ubahStatus($status)
     switch ($status) {
         case '1':
             return "Aktif";
-            break;
+
         default:
             return "Tidak Aktif";
     }
@@ -38,32 +38,34 @@ function ubahStatus($status)
 
 <body>
     <div class="wrapper">
-        <div class="container">
+        <div class="container mt-3">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">Data Siswa</div>
                         <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Umur</th>
-                                        <th>Jurusan</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($siswa as $key => $sw) { ?>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td><?php echo $sw['nama'] ?></td>
-                                            <td><?php echo $sw['umur'] ?></td>
-                                            <td><?php echo $sw['jurusan'] ?></td>
-                                            <td><?php echo ubahStatus(status: $sw['status']) ?></td>
+                                            <th>Nama</th>
+                                            <th>Umur</th>
+                                            <th>Jurusan</th>
+                                            <th>Status</th>
                                         </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($siswa as $key => $sw) { ?>
+                                            <tr>
+                                                <td><?php echo $sw['nama'] ?></td>
+                                                <td><?php echo $sw['umur'] ?></td>
+                                                <td><?php echo $sw['jurusan'] ?></td>
+                                                <td><?php echo ubahStatus(status: $sw['status']) ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

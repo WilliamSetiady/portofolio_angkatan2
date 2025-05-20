@@ -38,8 +38,13 @@ if (isset($_POST['email'])) {
 
                             <div class="card-body">
                                 <?php if (isset($_GET['access'])) :  ?>
-                                    <div class="alert alert-primary" role="alert">
+                                    <div class="alert alert-warning" role="alert">
                                         Anda harus login terlebih dahulu
+                                    </div>
+                                <?php endif ?>
+                                <?php if (isset($_GET['login'])) :  ?>
+                                    <div class="alert alert-danger" role="alert">
+                                        Tolong periksa email dan password kembali!
                                     </div>
                                 <?php endif ?>
                                 <form action="" method="post">

@@ -1,3 +1,39 @@
+<?php
+
+include 'config/connection_login.php';
+
+//--------------------------------------fungsi Save
+//Jika user menekan tombol Save, lakukan perintah, ambil data dari inputan, email, nama, dan password
+//Masukkan ke dalam tabel user: (nama, email, password) yang nilainya diambil dari masing-masing inputan
+if (isset($_POST['save'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = sha1($_POST['password']);
+
+    $query = mysqli_query($config, "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')");
+    if ($query) {
+        header("location: user.php?tambah=berhasil");
+    }
+}
+
+$header = isset($_GET['edit']) ? "Edit" : "Add";
+$id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
+$query_Edit = mysqli_query($config, "SELECT * FROM users WHERE id_user='$id_user'");
+$rowEdit = mysqli_fetch_assoc($query_Edit);
+
+
+if (isset($_POST['edit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = sha1($_POST['password']);
+
+    $queryUpdate = mysqli_query($config, "UPDATE users SET name='$name', email='$email', password='$password' WHERE id_user='$id_user' ");
+    if ($queryUpdate) {
+        header("location:user.php?ubah=berhasil");
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,44 +47,7 @@
 <body>
     <div class="wrapper">
 
-        <header class="shadow-sm">
-            <nav class="navbar navbar-expand-lg bg-body-white">
-
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Admin</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Page
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="user.php">User</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-            </nav>
-        </header>
+        <?php include "inc/header.php"; ?>
 
         <div class="content mt-5">
             <div class="container">
@@ -62,27 +61,31 @@
                                 <form action="" method="post">
                                     <div class="row mb-3">
                                         <div class="col-sm-2">
-                                            <label for="">Nama </label>
+                                            <label for="">Nama * </label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="Masukkan nama anda">
+                                            <input type="text" name="name" class="form-control"
+                                                placeholder="Masukkan nama anda" required
+                                                value="<?= $rowEdit['name'] ?>">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-2">
-                                            <label for="">Email </label>
+                                            <label for="">Email * </label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" placeholder="Masukkan Email anda">
+                                            <input type="email" name="email" class="form-control"
+                                                placeholder="Masukkan Email anda" required
+                                                value="<?= $rowEdit['email'] ?>">
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
+                                    <div class=" row mb-3">
                                         <div class="col-sm-2">
-                                            <label for="">Password </label>
+                                            <label for="">Password * </label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="password" class="form-control"
-                                                placeholder="Masukkan password anda">
+                                            <input type="password" name="password" class="form-control"
+                                                placeholder="Masukkan password anda" required>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -90,7 +93,8 @@
 
                                         </div>
                                         <div class="col-sm-1 ">
-                                            <button type="submit" class="form-control btn btn-primary">Save</button>
+                                            <button name="<?= isset($id_user) ? 'edit' : 'save'; ?>" type="submit"
+                                                class="form-control btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </form>

@@ -17,10 +17,14 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                Dashboard
+
                             </div>
                             <div class="card-body">
-
+                                <?php
+                                if (isset($_GET['page']) && file_exists("content/" . $_GET['page'] . ".php")) {
+                                    include "content/" . $_GET['page'] . ".php";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

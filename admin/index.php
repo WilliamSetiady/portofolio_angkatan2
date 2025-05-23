@@ -11,10 +11,11 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
     //melakukan check terhadap email yang diinput user, apakah benar atau tidak dengan yang ada di tabel user
     if (mysqli_num_rows($queryUser) > 0) {
-        $dataUsers = mysqli_fetch_assoc($queryUser);
-        $_SESSION['NAME'] = $dataUsers['name'];
-        $_SESSION['ID_USER'] = $dataUsers['id'];
-        header("location: dashboard.php");
+        $singleUserdat = mysqli_fetch_assoc($queryUser);
+        $_SESSION['NAME'] = $singleUserdat['name'];
+        $_SESSION['ID_USER'] = $singleUserdat['id'];
+        $_SESSION['ROLE'] = $singleUserdat['id_role'];
+        header("location: dashboard.php?level=" . base64_encode($_SESSION['ROLE']));
     } else {
         header("location: index.php?error=login");
     }

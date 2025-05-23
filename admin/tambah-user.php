@@ -30,7 +30,7 @@ if (isset($_POST['edit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     if (empty($_POST['password'])) {
-        $password = $_POST['password'];
+        $password = $rowEdit['password'];
     } else {
         $password = sha1($_POST['password']);
     }

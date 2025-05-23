@@ -56,12 +56,12 @@ function ubahStatus($status)
                                     </thead>
                                     <tbody>
                                         <?php foreach ($siswa as $key => $sw) { ?>
-                                            <tr>
-                                                <td><?php echo $sw['nama'] ?></td>
-                                                <td><?php echo $sw['umur'] ?></td>
-                                                <td><?php echo $sw['jurusan'] ?></td>
-                                                <td><?php echo ubahStatus(status: $sw['status']) ?></td>
-                                            </tr>
+                                        <tr>
+                                            <td><?php echo $sw['nama'] ?></td>
+                                            <td><?php echo $sw['umur'] ?></td>
+                                            <td><?php echo $sw['jurusan'] ?></td>
+                                            <td><?php echo ubahStatus(status: $sw['status']) ?></td>
+                                        </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>

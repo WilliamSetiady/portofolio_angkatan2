@@ -46,7 +46,7 @@ if (!$_name) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="dashboard.php?level=<?php echo base64_encode($_SESSION['ROLE']) ?>&page=manage_profile"></a>
+                            href="dashboard.php?level=<?php echo base64_encode($_SESSION['ROLE']) ?>&page=manage_profile">Profile</a>
                     </li>
                 <?php
                         }

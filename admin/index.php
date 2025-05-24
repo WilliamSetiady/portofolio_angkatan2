@@ -13,9 +13,9 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     if (mysqli_num_rows($queryUser) > 0) {
         $singleUserdat = mysqli_fetch_assoc($queryUser);
         $_SESSION['NAME'] = $singleUserdat['name'];
-        $_SESSION['ID_USER'] = $singleUserdat['id'];
+        $_SESSION['ID_USER'] = $singleUserdat['id_user'];
         $_SESSION['ROLE'] = $singleUserdat['id_role'];
-        header("location: dashboard.php?level=" . base64_encode($_SESSION['ROLE']));
+        header("location: dashboard.php");
     } else {
         header("location: index.php?error=login");
     }

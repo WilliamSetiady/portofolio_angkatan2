@@ -1,18 +1,13 @@
 <?php
-session_start();
-$_name = isset($_SESSION['NAME']) ? $_SESSION['NAME'] : '';
-
-if (!$_name) {
-    header("location:index.php?access=failed");
-}
 
 
 ?>
+
 <header class="shadow-sm">
     <nav class="navbar navbar-expand-lg bg-body-white">
 
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Admin</a>
+            <a class="navbar-brand" href="dashboard.php">Admin</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -29,7 +24,7 @@ if (!$_name) {
                             Page
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="?page=about">About</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -41,12 +36,10 @@ if (!$_name) {
                         if (isset($_SESSION['ROLE']) && $_SESSION['ROLE'] == 1) {
                         ?>
                     <li class="nav-item">
-                        <a class="nav-link"
-                            href="user.php?level=<?php echo base64_encode($_SESSION['ROLE']) ?>">User</a>
+                        <a class="nav-link" href="?page=user">User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"
-                            href="dashboard.php?level=<?php echo base64_encode($_SESSION['ROLE']) ?>&page=manage_profile">Profile</a>
+                        <a class="nav-link" href="?page=manage_profile">Profile</a>
                     </li>
                 <?php
                         }
@@ -60,7 +53,7 @@ if (!$_name) {
                             aria-expanded="false">
                             <?= $_name ?>
                         </a>
-                        <ul class="dropdown-menu ms-auto">
+                        <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item nav-link" href="keluar.php">Logout</a></li>
                         </ul>
                     </li>

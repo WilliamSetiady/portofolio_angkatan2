@@ -1,6 +1,18 @@
 <?php
-
 include 'admin/config/connection_login.php';
+
+if (isset($_POST['save'])) {
+
+    $contactName = $_POST['contact_name'];
+    $contactEmail = $_POST['contact_email'];
+    $contactSubject = $_POST['contact_subject'];
+    $contactMessage = $_POST['contact_message'];
+
+    $query = mysqli_query($config, "INSERT INTO contacts (contact_name, contact_email, contact_subject, contact_message) VALUES ('$contactName', '$contactEmail', '$contactSubject', '$contactMessage')");
+    // if ($query) {
+    //     header("location:index.php");
+    // }
+}
 
 $queryProfile = mysqli_query($config, "SELECT * FROM profiles ORDER BY profile_id DESC");
 $rowProfile = mysqli_fetch_assoc($queryProfile);
@@ -66,7 +78,9 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                 aria-expanded="false" aria-controls="navbar"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="border js-fullheight">
                 <div class="text-center">
-                    <div class="author-img" style="background-image: url(images/about.jpg);"></div>
+                    <div class="author-img"
+                        style="background-image: url(/admin/uploads/<?= isset($rowProfile['photo']) ? $rowProfile['photo'] : ''  ?>);">
+                    </div>
                     <h1 id="colorlib-logo"><a href="index.html">Jackson Ford</a></h1>
                     <span class="position"><a href="#">UI/UX/Designer</a> in Philippines</span>
                 </div>
@@ -90,7 +104,7 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                     <p><small>&copy;
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright <script>
-                            document.write(new Date().getFullYear());
+                                document.write(new Date().getFullYear());
                             </script> All rights reserved. Made with <i class="icon-heart" aria-hidden="true"></i> by <a
                                 href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -167,7 +181,8 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                                             <h2 class="colorlib-heading">
                                                 <?= isset($rowProfile['profile_name']) ? $rowProfile['profile_name'] : '' ?>
                                             </h2>
-                                            <p><strong>Hi I'm Jackson Ford</strong> On her way she met a copy. The copy
+                                            <p><strong><?= isset($rowProfile['about']) ? $rowProfile['about'] : '' ?></strong>
+                                                On her way she met a copy. The copy
                                                 warned the Little Blind Text, that where it came from it would have been
                                                 rewritten a thousand times and everything that was left from its origin
                                                 would be the word "and" and the Little Blind Text should turn around and
@@ -833,7 +848,7 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                             <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box"
                                 data-animate-effect="fadeInLeft">
                                 <span class="heading-meta">Get in Touch</span>
-                                <h2 class="colorlib-heading">Contact</h2>
+                                <h2 class="colorlib-heading">selanjutnya kita isi disini</h2>
                             </div>
                         </div>
                         <div class="row">
@@ -872,23 +887,28 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box"
                                         data-animate-effect="fadeInRight">
-                                        <form action="">
+                                        <form action="" method="post">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Name">
+                                                <input name="contact_name" type="text" class="form-control"
+                                                    placeholder="Name">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Email">
+                                                <input name="contact_email" type="text" class="form-control"
+                                                    placeholder="Email">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Subject">
+                                                <input name="contact_subject" type="text" class="form-control"
+                                                    placeholder="Subject">
                                             </div>
                                             <div class="form-group">
-                                                <textarea name="" id="message" cols="30" rows="7" class="form-control"
+                                                <textarea name="contact_message" cols="30" rows="7" class="form-control"
                                                     placeholder="Message"></textarea>
                                             </div>
                                             <div class="form-group">
-                                                <input type="submit" class="btn btn-primary btn-send-message"
-                                                    value="Send Message">
+                                                <button name="save" type="submit" class="form-control btn btn-primary">
+                                                    Send Message
+                                                </button>
+
                                             </div>
                                         </form>
                                     </div>

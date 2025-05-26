@@ -3,16 +3,16 @@
 include 'config/connection_login.php';
 
 //Munculkan/pilih semua data dari tabel user. Urutkan dari yang terbesar ke yang terkecil
-$query = mysqli_query($config, "SELECT * FROM about ORDER BY about_id DESC");
+$query = mysqli_query($config, "SELECT * FROM skills ORDER BY skill_id DESC");
 $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
 // print_r($user);
 // die;
 
 if (isset($_GET['delete'])) {
     $idd = $_GET['delete'];
-    $queryDelete = mysqli_query($config, "DELETE FROM about WHERE about_id='$idd'");
+    $queryDelete = mysqli_query($config, "DELETE FROM skills WHERE skill_id='$idd'");
     //mysqli_query($config, "DELETE FROM users WHERE id_user='$id'");
-    header("location:?page=about&hapus=berhasil");
+    header("location:?page=team&hapus=berhasil");
 }
 
 
@@ -23,16 +23,13 @@ if (isset($_GET['delete'])) {
 
 <div class="table-responsive">
     <div align="right" class="mb-3">
-        <a href="?page=tambah_about" class="btn btn-primary">Add</a>
+        <a href="?page=tambah_skill" class="btn btn-primary">Add</a>
     </div>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>About Me</th>
-                <th>Status</th>
-                <th>Image</th>
+                <th>Input Skills</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -41,15 +38,13 @@ if (isset($_GET['delete'])) {
                 <tr>
                     <!-- <?php print_r($data_value); ?> -->
                     <td><?= $key + 1; ?></td>
-                    <td><?= $data_value['about_name']; ?></td>
-                    <td><?= $data_value['content']; ?></td>
-                    <td><?= $data_value['status']; ?></td>
-                    <td><?= $data_value['image']; ?></td>
+                    <td><?= $data_value['skill_name']; ?></td>
+
                     <td>
-                        <a href="?page=tambah_about&edit=<?php echo $data_value['about_id']; ?>"
+                        <a href="?page=tambah_skill&edit=<?php echo $data_value['skill_id']; ?>"
                             class="btn btn-success btn-sm">Edit</a>
                         <a onclick="return confirm('Are you sure?')"
-                            href="?page=about&delete= <?php echo $data_value['about_id']; ?>"
+                            href="?page=skills&delete= <?php echo $data_value['skill_id']; ?>"
                             class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>

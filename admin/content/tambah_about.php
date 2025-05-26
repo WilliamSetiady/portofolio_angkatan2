@@ -9,48 +9,37 @@ if (isset($_POST['save'])) {
     $aboutName = $_POST['about_name'];
     $content = $_POST['content'];
     $status = $_POST['status'];
-    $image = $_FILES['image']['name'];
-    $size = $_FILES['image']['size'];
 
+    $image = $_FILES['image']['name'];
+    $tmp_name = $_FILES['image']['tmp_name'];
+
+    $fileName = uniqid() . '_' . basename($image);
+    $filePath = "uploads/" . $fileName;
+
+
+    $header = isset($_GET['edit']) ? "Edit" : "Add";
+    $id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
+    $query_Edit = mysqli_query($config, "SELECT * FROM about WHERE about_id='$id_user'");
+    $rowEdit = mysqli_fetch_assoc($query_Edit);
     //ekstensi (hanya bisa .png, jpg, jpeg)
     $extension = ['png', 'jpg', 'jpeg'];
+
     //apa user melakukan upload dengan ekstensi tersebut, jika ya, masukkan gambar ke table dan folder. Jika tidak, error(extension not found)
     //in_array berfungsi untuk mengecek, apakah ada pada suatu array
-    $ext = pathinfo($image, PATHINFO_EXTENSION);
-    if (in_array($ext, $extension)) {
-        $error[] = "Sorry, your file extension was not found";
-    } else {
-        $query = mysqli_query($config, "INSERT INTO about (about_name, content, image, status) VALUES ('$aboutName', '$content', '$image', '$status')");
-        if ($query) {
-            header("location:?page=about&tambah=berhasil");
-        }
+
+    $query = mysqli_query($config, "INSERT INTO about (about_name, content, image, status) VALUES ('$aboutName', '$content', '$fileName', '$status')");
+    if ($query) {
+        header("location:?page=about&tambah=berhasil");
     }
 }
 
 
 
 
-$header = isset($_GET['edit']) ? "Edit" : "Add";
-$id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
-$query_Edit = mysqli_query($config, "SELECT * FROM users WHERE id_user='$id_user'");
-$rowEdit = mysqli_fetch_assoc($query_Edit);
 
 
-if (isset($_POST['edit'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    if (empty($_POST['password'])) {
-        $password = $rowEdit['password'];
-    } else {
-        $password = sha1($_POST['password']);
-    }
 
 
-    $queryUpdate = mysqli_query($config, "UPDATE users SET name='$name', email='$email', password='$password' WHERE id_user='$id_user' ");
-    if ($queryUpdate) {
-        header("location:user.php?ubah=berhasil");
-    }
-}
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -60,7 +49,7 @@ if (isset($_POST['edit'])) {
         </div>
         <div class="col-sm-10">
             <input type="text" name="about_name" class="form-control" placeholder="Add your name" required
-                value="<?= isset($rowEdit) && isset($rowEdit['name']) ? $rowEdit['name'] : '' ?>">
+                value="<?= isset($rowEdit) && isset($rowEdit['about_name']) ? $rowEdit['about_name'] : '' ?>">
         </div>
     </div>
     <div class="row mb-3">
@@ -69,7 +58,7 @@ if (isset($_POST['edit'])) {
         </div>
         <div class="col-sm-10">
             <input type="text" name="content" class="form-control" placeholder="Fill in your information" required
-                value="<?= isset($rowEdit) && isset($rowEdit['email']) ? $rowEdit['email'] : '' ?>">
+                value="<?= isset($rowEdit) && isset($rowEdit['content']) ? $rowEdit['content'] : '' ?>">
         </div>
     </div>
     <div class="row mb-3">

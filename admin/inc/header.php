@@ -29,7 +29,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="">Contact</a></li>
+                            <li><a class="dropdown-item" href="?page=contact">Contact</a></li>
                         </ul>
                         <?php
 

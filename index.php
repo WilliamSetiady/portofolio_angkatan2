@@ -80,7 +80,7 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                 aria-expanded="false" aria-controls="navbar"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="border js-fullheight">
                 <div class="text-center">
-                    <div class="author-img" style="background-image: url(/admin/uploads/<?= $rowProfile['photo'] ?>);">
+                    <div class="author-img" style="background-image: url(admin/uploads/<?= $rowProfile['photo'] ?>);">
                     </div>
                     <h1 id="colorlib-logo"><a href="index.html">Jackson Ford</a></h1>
                     <span class="position"><a href="#">UI/UX/Designer</a> in Philippines</span>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2025 at 05:42 PM
+-- Generation Time: May 27, 2025 at 10:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -87,55 +87,6 @@ INSERT INTO `contacts` (`contact_id`, `contact_name`, `contact_email`, `contact_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data`
---
-
-CREATE TABLE `data` (
-  `data_id` int(10) NOT NULL,
-  `data_to` int(10) NOT NULL,
-  `data_speed` int(10) NOT NULL,
-  `data_name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `data`
---
-
-INSERT INTO `data` (`data_id`, `data_to`, `data_speed`, `data_name`) VALUES
-(1, 100, 5000, 'Cups of Coffee'),
-(2, 3, 6000, 'Projects'),
-(3, 13, 5000, 'Clients'),
-(4, 10, 5000, 'Partners');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `expertise`
---
-
-CREATE TABLE `expertise` (
-  `expertise_id` int(11) NOT NULL,
-  `color_services` varchar(25) NOT NULL,
-  `expertise_icon` varchar(50) NOT NULL,
-  `expertise_name` varchar(25) NOT NULL,
-  `expertise_desc` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `expertise`
---
-
-INSERT INTO `expertise` (`expertise_id`, `color_services`, `expertise_icon`, `expertise_name`, `expertise_desc`) VALUES
-(1, 'services color-1', 'icon-bulb', 'Innovative Ideas', 'My expertise lies in generating and developing innovative ideas that challenge conventional thinking and create meaningful impact. I specialize in identifying unmet needs, spotting emerging trends, and transforming abstract concepts into practical, forward-thinking solutions. Whether it’s streamlining processes, creating new products, or reimagining user experiences, I thrive at the intersection of creativity and strategy—bringing fresh perspectives that drive progress and inspire change.'),
-(2, 'services color-2', 'icon-data', 'Software', 'My expertise in software lies in crafting innovative, scalable solutions that solve real-world problems through elegant code and forward-thinking design. I specialize in developing robust applications, optimizing system performance, and integrating cutting-edge technologies such as AI, cloud computing, and automation. With a strong foundation in both back-end architecture and user-centric front-end development, I bring a creative, problem-solving mindset to every project—transforming complex challenges into streamlined, impactful software solutions.'),
-(5, 'services color-3', 'icon-phone3', 'Application', 'My expertise in application development centers on creating intuitive, high-performing apps that enhance user experience and deliver tangible value. From concept to deployment, I specialize in designing and building mobile and web applications that are both technically sound and visually engaging. With a strong grasp of modern frameworks, APIs, and UX/UI principles, I turn innovative ideas into practical, user-friendly solutions. Whether it\'s streamlining workflows, connecting communities, or introducing entirely new functionalities, I focus on building applications that not only work—but make a difference.'),
-(6, 'services color-4', 'icon-layers2', 'Design', 'I specialize in design that blends creativity, functionality, and user experience to bring ideas to life in visually compelling ways. With a strong understanding of design principles, color theory, and modern aesthetics, I craft intuitive interfaces and impactful visuals that not only look good but communicate effectively. Whether it\'s branding, UI/UX, or digital graphics, my approach is centered on solving problems through thoughtful, user-focused design. I aim to create experiences that resonate, inspire, and elevate the overall value of a product or message.'),
-(9, 'services color-5', 'icon-data', 'Software', '<p>I specialize in software development with a focus on building efficient, scalable, and innovative solutions that drive real-world impact. With a deep understanding of programming principles, system architecture, and modern development frameworks, I transform complex problems into clean, functional code. From back-end logic to front-end experiences, I craft applications that are not only robust and secure but also user-friendly and performance-optimized. My passion lies in continuous learning and pushing the boundaries of what software can do—turning ideas into powerful digital tools.</p>'),
-(10, 'services color-6', 'icon-phone3', 'Application', '<p>I specialize in application development, focusing on creating seamless, high-performance apps that combine functionality, design, and user experience. With expertise across the full development lifecycle—from initial concept and architecture to deployment and maintenance—I build applications that are intuitive, scalable, and aligned with user needs. Whether developing for mobile, web, or cross-platform environments, I prioritize clean code, responsive design, and reliable performance. My goal is to turn innovative ideas into practical, user-centered applications that deliver real value and lasting impact.</p>');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `levels`
 --
 
@@ -180,7 +131,7 @@ INSERT INTO `profiles` (`profile_id`, `profile_name`, `about`, `photo`) VALUES
 
 CREATE TABLE `skills` (
   `skill_id` int(11) NOT NULL,
-  `color_services` varchar(50) NOT NULL,
+  `skill_color` varchar(50) NOT NULL,
   `skill_icon` varchar(100) NOT NULL,
   `skill_name` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -189,11 +140,10 @@ CREATE TABLE `skills` (
 -- Dumping data for table `skills`
 --
 
-INSERT INTO `skills` (`skill_id`, `color_services`, `skill_icon`, `skill_name`) VALUES
-(9, 'services color-1', 'icon-display2', 'Graphic Design'),
-(10, 'services color-2', 'icon-world2', 'Web Design'),
-(11, 'services color-3', 'icon-download', 'Software'),
-(12, 'services color-4', 'icon-phone3', 'Application');
+INSERT INTO `skills` (`skill_id`, `skill_color`, `skill_icon`, `skill_name`) VALUES
+(1, '', '', 'HTM'),
+(2, '', '', 'CSS'),
+(3, '', '', 'c');
 
 -- --------------------------------------------------------
 
@@ -241,18 +191,6 @@ ALTER TABLE `contacts`
   ADD PRIMARY KEY (`contact_id`);
 
 --
--- Indexes for table `data`
---
-ALTER TABLE `data`
-  ADD PRIMARY KEY (`data_id`);
-
---
--- Indexes for table `expertise`
---
-ALTER TABLE `expertise`
-  ADD PRIMARY KEY (`expertise_id`);
-
---
 -- Indexes for table `levels`
 --
 ALTER TABLE `levels`
@@ -295,18 +233,6 @@ ALTER TABLE `contacts`
   MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `data`
---
-ALTER TABLE `data`
-  MODIFY `data_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `expertise`
---
-ALTER TABLE `expertise`
-  MODIFY `expertise_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT for table `levels`
 --
 ALTER TABLE `levels`
@@ -322,7 +248,7 @@ ALTER TABLE `profiles`
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`

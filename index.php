@@ -18,6 +18,12 @@ $queryProfile = mysqli_query($config, "SELECT * FROM profiles ORDER BY profile_i
 $rowProfile = mysqli_fetch_assoc($queryProfile);
 // $queryCategory = mysqli_query($config, "SELECT * FROM categories ORDER BY category_id DESC");
 // $rowCategory = mysqli_fetch_all($queryCategory, MYSQLI_ASSOC);
+$querySkills = mysqli_query($config, "SELECT * FROM skills ORDER BY skill_id ASC");
+$rowSkills = mysqli_fetch_all($querySkills, MYSQLI_ASSOC);
+$queryExpertise = mysqli_query($config, "SELECT * FROM expertise ORDER BY expertise_id ASC");
+$rowExpertise = mysqli_fetch_all($queryExpertise, MYSQLI_ASSOC);
+$queryData = mysqli_query($config, "SELECT * FROM data ORDER BY data_id ASC");
+$rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -187,21 +193,23 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <?php foreach($rowSkills as $skills) : ?>
                                     <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-                                        <div class="services color-1">
-                                            <span class="icon2"><i class="icon-display2"></i></span>
-                                            <h3>Graphic Design</h3>
+                                        <div class="<?= $skills['color_services'] ?>">
+                                            <span class="icon2"><i class="<?= $skills['skill_icon'] ?>"></i></span>
+                                            <h3><?= $skills['skill_name'] ?></h3>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+                                    <?php endforeach ?>
+                                    <!-- <div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
                                         <div class="services color-2">
-                                            <span class="icon2"><i class="icon-globe-outline"></i></span>
+                                            <span class="icon2"><i class="icon-world2"></i></span>
                                             <h3>Web Design</h3>
                                         </div>
                                     </div>
                                     <div class="col-md-3 animate-box" data-animate-effect="fadeInTop">
                                         <div class="services color-3">
-                                            <span class="icon2"><i class="icon-data"></i></span>
+                                            <span class="icon2"><i class="icon-download"></i></span>
                                             <h3>Software</h3>
                                         </div>
                                     </div>
@@ -210,7 +218,7 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                                             <span class="icon2"><i class="icon-phone3"></i></span>
                                             <h3>Application</h3>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
@@ -237,18 +245,20 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                             </div>
                         </div>
                         <div class="row row-pt-md">
+                            <?php foreach($rowExpertise as $expertise): ?>
                             <div class="col-md-4 text-center animate-box">
-                                <div class="services color-1">
+                                <div class="<?= $expertise['color_services'] ?>">
                                     <span class="icon">
-                                        <i class="icon-bulb"></i>
+                                        <i class="<?= $expertise['expertise_icon'] ?>"></i>
                                     </span>
                                     <div class="desc">
-                                        <h3>Innovative Ideas</h3>
-                                        <!-- <p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p> -->
+                                        <h3><?= $expertise['expertise_name'] ?></h3>
+                                        <p><?= $expertise['expertise_desc'] ?></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 text-center animate-box">
+                            <?php endforeach ?>
+                            <!-- <div class="col-md-4 text-center animate-box">
                                 <div class="services color-2">
                                     <span class="icon">
                                         <i class="icon-data"></i>
@@ -302,7 +312,7 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                                         <p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </section>
@@ -314,12 +324,14 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                         <div class="row">
                         </div>
                         <div class="row">
+                            <?php foreach($rowData as $data): ?>
                             <div class="col-md-3 text-center animate-box">
-                                <span class="colorlib-counter js-counter" data-from="0" data-to="309" data-speed="5000"
+                                <span class="colorlib-counter js-counter" data-from="0" data-to="<?= $data['data_to'] ?>" data-speed="<?= $data['data_speed'] ?>"
                                     data-refresh-interval="50"></span>
-                                <span class="colorlib-counter-label">Cups of coffee</span>
+                                <span class="colorlib-counter-label"><?= $data['data_name'] ?></span>
                             </div>
-                            <div class="col-md-3 text-center animate-box">
+                            <?php endforeach ?>
+                            <!-- <div class="col-md-3 text-center animate-box">
                                 <span class="colorlib-counter js-counter" data-from="0" data-to="356" data-speed="5000"
                                     data-refresh-interval="50"></span>
                                 <span class="colorlib-counter-label">Projects</span>
@@ -333,7 +345,7 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                                 <span class="colorlib-counter js-counter" data-from="0" data-to="10" data-speed="5000"
                                     data-refresh-interval="50"></span>
                                 <span class="colorlib-counter-label">Partners</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

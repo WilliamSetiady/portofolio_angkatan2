@@ -5,11 +5,11 @@ include 'config/connection_login.php';
 //Jika user menekan tombol Save, lakukan perintah, ambil data dari inputan, email, nama, dan password
 //Masukkan ke dalam tabel user: (nama, email, password) yang nilainya diambil dari masing-masing inputan
 if (isset($_POST['save'])) {
+    $colorServices = $_POST['color_services'];
+    $skillIcon = $_POST['skill_icon'];
+    $skillName = $_POST['skill_name'];
 
-    $skill = $_POST['skill_name'];
-
-
-    $query = mysqli_query($config, "INSERT INTO skills (skill_name) VALUES ('$skill')");
+    $query = mysqli_query($config, "INSERT INTO skills (color_services, skill_icon, skill_name) VALUES ('$colorServices', '$skillIcon', '$skillName')");
     if ($query) {
         header("location:?page=skills&tambah=berhasil");
     }
@@ -26,15 +26,24 @@ $rowEdit = mysqli_fetch_assoc($query_Edit);
 
 
 if (isset($_POST['edit'])) {
-    $skill = $_POST['skill_name'];
-    $queryUpdate = mysqli_query($config, "UPDATE skills SET skill_name='$skill' WHERE skill_id='$skill_id' ");
-    if ($queryUpdate) {
-        header("location:?page=skills&ubah=berhasil");
-    }
+    $colorServices = $_POST['color_services'];
+    $skillIcon = $_POST['skill_icon'];
+    $skillName = $_POST['skill_name'];
+    $queryUpdate = mysqli_query($config, "UPDATE skills SET color_services='$colorServices', skill_icon='$skillIcon', skill_name='$skillName' WHERE skill_id='$skill_id' ");
+    header("location:?page=skills&ubah=berhasil");
 }
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
+    <div class="row mb-3">
+        <div class="col-sm-2">
+            <label for="">Color Services </label>
+        </div>
+        <div class="col-sm-10">
+            <input type="text" name="color_services" class="form-control" placeholder="Color" required
+                value="<?= isset($rowEdit) && isset($rowEdit['color_services']) ? $rowEdit['color_services'] : '' ?>">
+        </div>
+    </div>
     <div class="row mb-3">
         <div class="col-sm-2">
             <label for="">Icon </label>
@@ -49,7 +58,7 @@ if (isset($_POST['edit'])) {
             <label for="">Skills </label>
         </div>
         <div class="col-sm-10">
-            <input type="text" name="skill_name" class="form-control" placeholder="Add your skills" required
+            <input type="text" name="skill_name" class="form-control" placeholder="Skills" required
                 value="<?= isset($rowEdit) && isset($rowEdit['skill_name']) ? $rowEdit['skill_name'] : '' ?>">
         </div>
     </div>

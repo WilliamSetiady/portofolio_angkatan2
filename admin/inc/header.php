@@ -28,6 +28,8 @@ $id_role = isset($_SESSION['ROLE']) ? $_SESSION['ROLE'] : '';
                             <li><a class="dropdown-item" href="?page=about">About</a></li>
                             <li><a class="dropdown-item" href="?page=manage_profile">Profile</a></li>
                             <li><a class="dropdown-item" href="?page=skills">Skills</a></li>
+                            <li><a class="dropdown-item" href="?page=expertise">Expertise</a></li>
+                            <li><a class="dropdown-item" href="?page=data">Data</a></li>
                             <!-- jika role admin, terdapat halaman user, jika tidak, tidak ada -->
                             <?php if ($id_role == 1): ?>
                                 <li><a class="dropdown-item" href="?page=user">User</a></li>

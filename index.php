@@ -16,6 +16,8 @@ if (isset($_POST['save'])) {
 
 $queryProfile = mysqli_query($config, "SELECT * FROM profiles ORDER BY profile_id DESC");
 $rowProfile = mysqli_fetch_assoc($queryProfile);
+// $queryCategory = mysqli_query($config, "SELECT * FROM categories ORDER BY category_id DESC");
+// $rowCategory = mysqli_fetch_all($queryCategory, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -78,8 +80,7 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                 aria-expanded="false" aria-controls="navbar"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="border js-fullheight">
                 <div class="text-center">
-                    <div class="author-img"
-                        style="background-image: url(/admin/uploads/<?= isset($rowProfile['photo']) ? $rowProfile['photo'] : ''  ?>);">
+                    <div class="author-img" style="background-image: url(/admin/uploads/<?= $rowProfile['photo'] ?>);">
                     </div>
                     <h1 id="colorlib-logo"><a href="index.html">Jackson Ford</a></h1>
                     <span class="position"><a href="#">UI/UX/Designer</a> in Philippines</span>
@@ -181,23 +182,14 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                                             <h2 class="colorlib-heading">
                                                 <?= isset($rowProfile['profile_name']) ? $rowProfile['profile_name'] : '' ?>
                                             </h2>
-                                            <p><strong><?= isset($rowProfile['about']) ? $rowProfile['about'] : '' ?></strong>
-                                                On her way she met a copy. The copy
-                                                warned the Little Blind Text, that where it came from it would have been
-                                                rewritten a thousand times and everything that was left from its origin
-                                                would be the word "and" and the Little Blind Text should turn around and
-                                                return to its own, safe country.</p>
-                                            <p>Even the all-powerful Pointing has no control about the blind texts it is
-                                                an almost unorthographic life One day however a small line of blind text
-                                                by the name of Lorem Ipsum decided to leave for the far World of
-                                                Grammar.</p>
+                                            <p><?= isset($rowProfile['about']) ? $rowProfile['about'] : '' ?></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
                                         <div class="services color-1">
-                                            <span class="icon2"><i class="icon-bulb"></i></span>
+                                            <span class="icon2"><i class="icon-display2"></i></span>
                                             <h3>Graphic Design</h3>
                                         </div>
                                     </div>
@@ -252,7 +244,7 @@ $rowProfile = mysqli_fetch_assoc($queryProfile);
                                     </span>
                                     <div class="desc">
                                         <h3>Innovative Ideas</h3>
-                                        <p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
+                                        <!-- <p>Separated they live in Bookmarksgrove right at the coast of the Semantics</p> -->
                                     </div>
                                 </div>
                             </div>

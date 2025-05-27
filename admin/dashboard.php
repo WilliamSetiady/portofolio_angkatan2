@@ -45,7 +45,7 @@ include "config/connection_login.php";
         <?php include 'inc/header.php'; ?>
         <div class="content mt-5">
             <div class="container">
-                <div class="row">
+                <div class="row ">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">

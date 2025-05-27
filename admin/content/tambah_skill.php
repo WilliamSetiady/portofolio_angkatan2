@@ -37,6 +37,15 @@ if (isset($_POST['edit'])) {
 <form action="" method="post" enctype="multipart/form-data">
     <div class="row mb-3">
         <div class="col-sm-2">
+            <label for="">Icon </label>
+        </div>
+        <div class="col-sm-10">
+            <input type="text" name="skill_icon" class="form-control" placeholder="Icon" required
+                value="<?= isset($rowEdit) && isset($rowEdit['skill_icon']) ? $rowEdit['skill_icon'] : '' ?>">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-2">
             <label for="">Skills </label>
         </div>
         <div class="col-sm-10">
@@ -57,7 +66,7 @@ if (isset($_POST['edit'])) {
 
         </div>
         <div class="col-sm-1 ">
-            <button name="save" type="<?= isset($skill_id) && $skill_id != '' ? 'edit' : 'save'; ?>"
+            <button name="<?= isset($skill_id) && $skill_id != '' ? 'edit' : 'save'; ?>" type=""
                 class="form-control btn btn-primary">
                 <?= isset($skill_id) && $skill_id != '' ? 'Update' : 'Save'; ?>
             </button>

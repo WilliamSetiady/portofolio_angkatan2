@@ -8,7 +8,7 @@ if (isset($_GET['delete'])) {
     $idd = $_GET['delete'];
     $queryDelete = mysqli_query($config, "DELETE FROM contacts WHERE contact_id='$idd'");
     //mysqli_query($config, "DELETE FROM users WHERE id_user='$id'");
-    header("location: ?page=user&hapus=berhasil");
+    header("location: ?page=contact&hapus=berhasil");
 }
 
 ?>
@@ -34,11 +34,9 @@ if (isset($_GET['delete'])) {
                     <td><?= $data_value['contact_subject']; ?></td>
                     <td><?= $data_value['contact_message']; ?></td>
                     <td>
-                        <a href="tambah-user.php?edit=<?php echo $data_value['id_user']; ?>"
-                            class="btn btn-success btn-sm">Edit</a>
                         <a onclick="return confirm('Are you sure?')"
-                            href="user.php?delete= <?php echo $data_value['id_user']; ?>"
-                            class="btn btn-danger btn-sm">Delete</a>
+                            href="?page=contact&delete= <?php echo $data_value['contact_id']; ?>"
+                            class="btn btn-danger btn-sm content-center d-flex justify-content-center">Delete</a>
                     </td>
                 </tr>
             <?php endforeach ?>

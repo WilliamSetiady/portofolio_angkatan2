@@ -27,27 +27,36 @@ if (isset($_GET['delete'])) {
     </div>
     <table class="table table-bordered table-striped">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>No</th>
+                <th>Skill Icon</th>
                 <th>Input Skills</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($row as $key => $data_value): ?>
-                <tr>
-                    <!-- <?php print_r($data_value); ?> -->
-                    <td><?= $key + 1; ?></td>
-                    <td><?= $data_value['skill_name']; ?></td>
+            <tr>
+                <!-- <?php print_r($data_value); ?> -->
+                <td><?= $key + 1; ?></td>
+                <td><?= $data_value['skill_icon']; ?></td>
+                <td><?= $data_value['skill_name']; ?></td>
 
-                    <td>
-                        <a href="?page=tambah_skill&edit=<?php echo $data_value['skill_id']; ?>"
-                            class="btn btn-success btn-sm">Edit</a>
-                        <a onclick="return confirm('Are you sure?')"
-                            href="?page=skills&delete= <?php echo $data_value['skill_id']; ?>"
-                            class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
+                <td>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-6">
+
+                            <a href="?page=tambah_skill&edit=<?php echo $data_value['skill_id']; ?>"
+                                class="btn btn-success btn-sm d-flex justify-content-center">Edit</a>
+                        </div>
+                        <div class="col-6">
+                            <a onclick="return confirm('Are you sure?')"
+                                href="?page=skills&delete= <?php echo $data_value['skill_id']; ?>"
+                                class="btn btn-danger btn-sm d-flex justify-content-center">Delete</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
             <?php endforeach ?>
         </tbody>
     </table>

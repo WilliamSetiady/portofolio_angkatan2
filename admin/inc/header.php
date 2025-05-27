@@ -1,5 +1,6 @@
 <?php
 
+$id_role = isset($_SESSION['ROLE']) ? $_SESSION['ROLE'] : '';
 
 ?>
 
@@ -25,7 +26,12 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="?page=about">About</a></li>
+                            <li><a class="dropdown-item" href="?page=manage_profile">Profile</a></li>
                             <li><a class="dropdown-item" href="?page=skills">Skills</a></li>
+                            <!-- jika role admin, terdapat halaman user, jika tidak, tidak ada -->
+                            <?php if ($id_role == 1): ?>
+                                <li><a class="dropdown-item" href="?page=user">User</a></li>
+                            <?php endif ?>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -35,16 +41,10 @@
 
                         if (isset($_SESSION['ROLE']) && $_SESSION['ROLE'] == 1) {
                         ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?page=user">User</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?page=manage_profile">Profile</a>
-                    </li>
-                <?php
+                        <?php
                         }
-                ?>
-                </li>
+                        ?>
+                    </li>
 
                 </ul>
                 <ul class="navbar-nav  mr-auto mb-2 mb-lg-0">

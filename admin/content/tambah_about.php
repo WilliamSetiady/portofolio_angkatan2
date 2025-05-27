@@ -4,6 +4,12 @@ include 'config/connection_login.php';
 //--------------------------------------fungsi Save
 //Jika user menekan tombol Save, lakukan perintah, ambil data dari inputan, email, nama, dan password
 //Masukkan ke dalam tabel user: (nama, email, password) yang nilainya diambil dari masing-masing inputan
+$header = isset($_GET['edit']) ? "Edit" : "Add";
+$id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
+$query_Edit = mysqli_query($config, "SELECT * FROM about WHERE about_id='$id_user'");
+$rowEdit = mysqli_fetch_assoc($query_Edit);
+//ekstensi (hanya bisa .png, jpg, jpeg)
+$extension = ['png', 'jpg', 'jpeg'];
 if (isset($_POST['save'])) {
 
     $aboutName = $_POST['about_name'];
@@ -14,16 +20,8 @@ if (isset($_POST['save'])) {
     $tmp_name = $_FILES['image']['tmp_name'];
 
     $fileName = uniqid() . '_' . basename($image);
-    $filePath = "uploads/" . $fileName;
-
-
-    $header = isset($_GET['edit']) ? "Edit" : "Add";
-    $id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
-    $query_Edit = mysqli_query($config, "SELECT * FROM about WHERE about_id='$id_user'");
-    $rowEdit = mysqli_fetch_assoc($query_Edit);
-    //ekstensi (hanya bisa .png, jpg, jpeg)
-    $extension = ['png', 'jpg', 'jpeg'];
-
+    $filePath = "about_src/" . $fileName;
+    move_uploaded_file($tmp_name, $filePath);
     //apa user melakukan upload dengan ekstensi tersebut, jika ya, masukkan gambar ke table dan folder. Jika tidak, error(extension not found)
     //in_array berfungsi untuk mengecek, apakah ada pada suatu array
 
@@ -32,6 +30,26 @@ if (isset($_POST['save'])) {
         header("location:?page=about&tambah=berhasil");
     }
 }
+if (isset($_POST['edit'])) {
+    $aboutName = $_POST['about_name'];
+    $content = $_POST['content'];
+    $status = $_POST['status'];
+
+    $image = $_FILES['image']['name'];
+    $tmp_name = $_FILES['image']['tmp_name'];
+
+    $fileName = uniqid() . '_' . basename($image);
+    $filePath = "about_src/" . $fileName;
+    if (!empty($image)) {
+        move_uploaded_file($tmp_name, $filePath);
+        $queryUpdate = mysqli_query($config, "UPDATE about SET about_name='$aboutName', content='$content', image='$fileName', status='$status' WHERE about_id='$id_user' ");
+        header("location:?page=about&ubah=berhasil");
+    } else {
+        $queryUpdate = mysqli_query($config, "UPDATE about SET about_name='$aboutName', content='$content', status='$status' WHERE about_id='$id_user' ");
+        header("location:?page=about&ubah=berhasil");
+    }
+}
+
 
 
 
@@ -91,7 +109,8 @@ if (isset($_POST['save'])) {
 
         </div>
         <div class="col-sm-1 ">
-            <button name="save" type="submit" class="form-control btn btn-primary">
+            <button name="<?= isset($id_user) && $id_user != '' ? 'edit' : 'save'; ?>" type="submit"
+                class="form-control btn btn-primary">
                 <?= isset($id_user) && $id_user != '' ? 'Update' : 'Save'; ?>
             </button>
         </div>

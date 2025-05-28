@@ -3,16 +3,16 @@
 include 'config/connection_login.php';
 
 //Munculkan/pilih semua data dari tabel user. Urutkan dari yang terbesar ke yang terkecil
-$query = mysqli_query($config, "SELECT * FROM skills ORDER BY skill_id DESC");
+$query = mysqli_query($config, "SELECT * FROM education ORDER BY education_id DESC");
 $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
 // print_r($user);
 // die;
 
 if (isset($_GET['delete'])) {
     $idd = $_GET['delete'];
-    $queryDelete = mysqli_query($config, "DELETE FROM skills WHERE skill_id='$idd'");
+    $queryDelete = mysqli_query($config, "DELETE FROM education WHERE education_id='$idd'");
     //mysqli_query($config, "DELETE FROM users WHERE id_user='$id'");
-    header("location:?page=skills&hapus=berhasil");
+    header("location:?page=education&hapus=berhasil");
 }
 
 
@@ -23,16 +23,15 @@ if (isset($_GET['delete'])) {
 
 <div class="table-responsive">
     <div align="right" class="mb-3">
-        <a href="?page=tambah_skill" class="btn btn-primary">Add</a>
+        <a href="?page=tambah_education" class="btn btn-primary">Add</a>
     </div>
-    <table class="table table-bordered table-striped">
+    <table id="table" class="table table-bordered table-striped">
         <thead>
             <tr class="text-center">
                 <th>No</th>
-                <th>Skill Color</th>
-                <th>Skill Icon</th>
-                <th>Input Skills</th>
-                <th>Skill Points</th>
+                <th>Education</th>
+                <th>Description</th>
+                <th>Define</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -41,21 +40,20 @@ if (isset($_GET['delete'])) {
                 <tr>
                     <!-- <?php print_r($data_value); ?> -->
                     <td><?= $key + 1; ?></td>
-                    <td><?= $data_value['color_services']; ?></td>
-                    <td><?= $data_value['skill_icon']; ?></td>
-                    <td><?= $data_value['skill_name']; ?></td>
-                    <td><?= $data_value['skill_point']; ?></td>
+                    <td><?= $data_value['education_name']; ?></td>
+                    <td><?= $data_value['education_desc']; ?></td>
+                    <td><?= $data_value['education_def']; ?></td>
 
                     <td>
                         <div class="row d-flex justify-content-center">
                             <div class="col-6">
 
-                                <a href="?page=tambah_skill&edit=<?php echo $data_value['skill_id']; ?>"
+                                <a href="?page=tambah_education&edit=<?php echo $data_value['education_id']; ?>"
                                     class="btn btn-success btn-sm d-flex justify-content-center">Edit</a>
                             </div>
                             <div class="col-6">
                                 <a onclick="return confirm('Are you sure?')"
-                                    href="?page=skills&delete=<?php echo $data_value['skill_id']; ?>"
+                                    href="?page=education&delete=<?php echo $data_value['education_id']; ?>"
                                     class="btn btn-danger btn-sm d-flex justify-content-center">Delete</a>
                             </div>
                         </div>

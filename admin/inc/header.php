@@ -19,6 +19,8 @@ $id_role = isset($_SESSION['ROLE']) ? $_SESSION['ROLE'] : '';
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
+                    <li><a class="nav-link active" href="?page=manage_profile">Profile</a></li>
+                    <li><a class="nav-link active" href="?page=education">Education</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -26,7 +28,6 @@ $id_role = isset($_SESSION['ROLE']) ? $_SESSION['ROLE'] : '';
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="?page=about">About</a></li>
-                            <li><a class="dropdown-item" href="?page=manage_profile">Profile</a></li>
                             <li><a class="dropdown-item" href="?page=skills">Skills</a></li>
                             <li><a class="dropdown-item" href="?page=expertise">Expertise</a></li>
                             <li><a class="dropdown-item" href="?page=data">Data</a></li>

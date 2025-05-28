@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2025 at 05:42 PM
+-- Generation Time: May 28, 2025 at 09:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -110,6 +110,29 @@ INSERT INTO `data` (`data_id`, `data_to`, `data_speed`, `data_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `education`
+--
+
+CREATE TABLE `education` (
+  `education_id` int(11) NOT NULL,
+  `education_name` varchar(50) NOT NULL,
+  `education_desc` text NOT NULL,
+  `education_def` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `education`
+--
+
+INSERT INTO `education` (`education_id`, `education_name`, `education_desc`, `education_def`) VALUES
+(7, 'Master Degree Graphic Design', '<p><span style=\"color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.&nbsp;</span><span style=\"color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</span></p>', 'One'),
+(8, 'Bachelor Degree Of Computer Science', '<p style=\"margin-right: 0px; margin-bottom: 1.5em; margin-left: 0px; color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">Far far away, behind the word&nbsp;<strong style=\"font-weight: bold;\">mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p><ul style=\"margin-bottom: 10px; color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\"><li>Separated they live in Bookmarksgrove right</li><li>Separated they live in Bookmarksgrove right</li></ul>', 'Two'),
+(9, 'Diploma in Information Technology', '<p><span style=\"color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">Far far away, behind the word&nbsp;</span><strong style=\"font-weight: bold; color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">mountains</strong><span style=\"color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</span></p>', 'Three'),
+(10, 'High School Secondary Education', '<p><span style=\"color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">Far far away, behind the word&nbsp;</span><strong style=\"font-weight: bold; color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">mountains</strong><span style=\"color: rgba(0, 0, 0, 0.7); font-family: Quicksand, Arial, sans-serif; font-size: 15px;\">, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</span></p>', 'Four');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `expertise`
 --
 
@@ -182,18 +205,19 @@ CREATE TABLE `skills` (
   `skill_id` int(11) NOT NULL,
   `color_services` varchar(50) NOT NULL,
   `skill_icon` varchar(100) NOT NULL,
-  `skill_name` varchar(25) NOT NULL
+  `skill_name` varchar(25) NOT NULL,
+  `skill_point` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `skills`
 --
 
-INSERT INTO `skills` (`skill_id`, `color_services`, `skill_icon`, `skill_name`) VALUES
-(9, 'services color-1', 'icon-display2', 'Graphic Design'),
-(10, 'services color-2', 'icon-world2', 'Web Design'),
-(11, 'services color-3', 'icon-download', 'Software'),
-(12, 'services color-4', 'icon-phone3', 'Application');
+INSERT INTO `skills` (`skill_id`, `color_services`, `skill_icon`, `skill_name`, `skill_point`) VALUES
+(9, 'services color-1', 'icon-display2', 'Graphic Design', 55),
+(10, 'services color-2', 'icon-world2', 'Web Design', 50),
+(11, 'services color-3', 'icon-download', 'Software', 45),
+(12, 'services color-5', 'icon-phone3', 'Application', 90);
 
 -- --------------------------------------------------------
 
@@ -224,6 +248,20 @@ INSERT INTO `users` (`id_user`, `id_role`, `id_profile`, `name`, `email`, `passw
 (34, 1, NULL, 'd', 'adiprabowok@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '2025-05-27 03:04:38', NULL),
 (35, 1, NULL, 'dsdasdsd', 'adiprabowok@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '2025-05-27 03:06:28', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `work`
+--
+
+CREATE TABLE `work` (
+  `work_id` int(11) NOT NULL,
+  `work_name` varchar(50) NOT NULL,
+  `work_year` varchar(25) NOT NULL,
+  `work_desc` int(11) NOT NULL,
+  `animate` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -245,6 +283,12 @@ ALTER TABLE `contacts`
 --
 ALTER TABLE `data`
   ADD PRIMARY KEY (`data_id`);
+
+--
+-- Indexes for table `education`
+--
+ALTER TABLE `education`
+  ADD PRIMARY KEY (`education_id`);
 
 --
 -- Indexes for table `expertise`
@@ -279,6 +323,12 @@ ALTER TABLE `users`
   ADD KEY `profile_id_to_id_profile` (`id_profile`);
 
 --
+-- Indexes for table `work`
+--
+ALTER TABLE `work`
+  ADD PRIMARY KEY (`work_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -301,10 +351,16 @@ ALTER TABLE `data`
   MODIFY `data_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `education`
+--
+ALTER TABLE `education`
+  MODIFY `education_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `expertise`
 --
 ALTER TABLE `expertise`
-  MODIFY `expertise_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `expertise_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `levels`
@@ -329,6 +385,12 @@ ALTER TABLE `skills`
 --
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `work`
+--
+ALTER TABLE `work`
+  MODIFY `work_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

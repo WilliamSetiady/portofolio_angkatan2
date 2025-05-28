@@ -8,8 +8,8 @@ if (isset($_POST['save'])) {
     $colorServices = $_POST['color_services'];
     $skillIcon = $_POST['skill_icon'];
     $skillName = $_POST['skill_name'];
-
-    $query = mysqli_query($config, "INSERT INTO skills (color_services, skill_icon, skill_name) VALUES ('$colorServices', '$skillIcon', '$skillName')");
+    $skillPoint = $_POST['skill_point'];
+    $query = mysqli_query($config, "INSERT INTO skills (color_services, skill_icon, skill_name, skill_point) VALUES ('$colorServices', '$skillIcon', '$skillName', '$skillPoint')");
     if ($query) {
         header("location:?page=skills&tambah=berhasil");
     }
@@ -29,7 +29,8 @@ if (isset($_POST['edit'])) {
     $colorServices = $_POST['color_services'];
     $skillIcon = $_POST['skill_icon'];
     $skillName = $_POST['skill_name'];
-    $queryUpdate = mysqli_query($config, "UPDATE skills SET color_services='$colorServices', skill_icon='$skillIcon', skill_name='$skillName' WHERE skill_id='$skill_id' ");
+    $skillPoint = $_POST['skill_point'];
+    $queryUpdate = mysqli_query($config, "UPDATE skills SET color_services='$colorServices', skill_icon='$skillIcon', skill_name='$skillName', skill_point='$skillPoint' WHERE skill_id='$skill_id' ");
     header("location:?page=skills&ubah=berhasil");
 }
 ?>
@@ -60,6 +61,15 @@ if (isset($_POST['edit'])) {
         <div class="col-sm-10">
             <input type="text" name="skill_name" class="form-control" placeholder="Skills" required
                 value="<?= isset($rowEdit) && isset($rowEdit['skill_name']) ? $rowEdit['skill_name'] : '' ?>">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-2">
+            <label for="">Skill Point </label>
+        </div>
+        <div class="col-sm-10">
+            <input type="number" name="skill_point" class="form-control" placeholder="Point" required
+                value="<?= isset($rowEdit) && isset($rowEdit['skill_point']) ? $rowEdit['skill_point'] : '' ?>">
         </div>
     </div>
     <!-- <div class=" row mb-3">

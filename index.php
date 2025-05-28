@@ -24,6 +24,8 @@ $queryExpertise = mysqli_query($config, "SELECT * FROM expertise ORDER BY expert
 $rowExpertise = mysqli_fetch_all($queryExpertise, MYSQLI_ASSOC);
 $queryData = mysqli_query($config, "SELECT * FROM data ORDER BY data_id ASC");
 $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
+$queryEducation = mysqli_query($config, "SELECT * FROM education ORDER BY education_id ASC");
+$rowEducation = mysqli_fetch_all($queryEducation, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -111,7 +113,7 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                     <p><small>&copy;
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright <script>
-                                document.write(new Date().getFullYear());
+                            document.write(new Date().getFullYear());
                             </script> All rights reserved. Made with <i class="icon-heart" aria-hidden="true"></i> by <a
                                 href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -193,7 +195,7 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <?php foreach($rowSkills as $skills) : ?>
+                                    <?php foreach ($rowSkills as $skills) : ?>
                                     <div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
                                         <div class="<?= $skills['color_services'] ?>">
                                             <span class="icon2"><i class="<?= $skills['skill_icon'] ?>"></i></span>
@@ -245,7 +247,7 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                             </div>
                         </div>
                         <div class="row row-pt-md">
-                            <?php foreach($rowExpertise as $expertise): ?>
+                            <?php foreach ($rowExpertise as $expertise): ?>
                             <div class="col-md-4 text-center animate-box">
                                 <div class="<?= $expertise['color_services'] ?>">
                                     <span class="icon">
@@ -324,9 +326,10 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                         <div class="row">
                         </div>
                         <div class="row">
-                            <?php foreach($rowData as $data): ?>
+                            <?php foreach ($rowData as $data): ?>
                             <div class="col-md-3 text-center animate-box">
-                                <span class="colorlib-counter js-counter" data-from="0" data-to="<?= $data['data_to'] ?>" data-speed="<?= $data['data_speed'] ?>"
+                                <span class="colorlib-counter js-counter" data-from="0"
+                                    data-to="<?= $data['data_to'] ?>" data-speed="<?= $data['data_speed'] ?>"
                                     data-refresh-interval="50"></span>
                                 <span class="colorlib-counter-label"><?= $data['data_name'] ?></span>
                             </div>
@@ -366,18 +369,21 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                                     She packed her seven versalia, put her initial into the belt and made herself on the
                                     way.</p>
                             </div>
+                            <?php foreach ($rowSkills as $keySp => $skillPoint): ?>
                             <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
                                 <div class="progress-wrap">
-                                    <h3>Photoshop</h3>
+                                    <h3><?= $skillPoint['skill_name'] ?></h3>
                                     <div class="progress">
-                                        <div class="progress-bar color-1" role="progressbar" aria-valuenow="75"
-                                            aria-valuemin="0" aria-valuemax="100" style="width:75%">
-                                            <span>75%</span>
+                                        <div class="progress-bar color-<?= $keySp + 1 ?>" role="progressbar"
+                                            aria-valuenow="<?= $skillPoint['skill_point'] ?>" aria-valuemin="0"
+                                            aria-valuemax="100" style="width:<?= $skillPoint['skill_point'] ?>%">
+                                            <span><?= $skillPoint['skill_point'] ?>%</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
+                            <?php endforeach ?>
+                            <!-- <div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
                                 <div class="progress-wrap">
                                     <h3>jQuery</h3>
                                     <div class="progress">
@@ -431,7 +437,7 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </section>
@@ -449,33 +455,33 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                             <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
                                 <div class="fancy-collapse-panel">
                                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                                        <?php foreach ($rowEducation as $education): ?>
                                         <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingOne">
+                                            <div class="panel-heading" role="tab"
+                                                id="heading<?= $education['education_def'] ?>">
                                                 <h4 class="panel-title">
                                                     <a data-toggle="collapse" data-parent="#accordion"
-                                                        href="#collapseOne" aria-expanded="true"
-                                                        aria-controls="collapseOne">Master Degree Graphic Design
+                                                        href="#collapse<?= $education['education_def'] ?>"
+                                                        aria-expanded="true"
+                                                        aria-controls="collapse<?= $education['education_def'] ?>"><?= $education['education_name'] ?>
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
-                                                aria-labelledby="headingOne">
+                                            <div id="collapse<?= $education['education_def'] ?>"
+                                                class="panel-collapse collapse in" role="tabpanel"
+                                                aria-labelledby="heading<?= $education['education_def'] ?>">
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <p>Far far away, behind the word mountains, far from the
-                                                                countries Vokalia and Consonantia, there live the blind
-                                                                texts. </p>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <p>Separated they live in Bookmarksgrove right at the coast
-                                                                of the Semantics, a large language ocean.</p>
+                                                            <p><?= $education['education_desc'] ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="panel panel-default">
+                                        <?php endforeach ?>
+                                        <!-- <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="headingTwo">
                                                 <h4 class="panel-title">
                                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
@@ -556,7 +562,7 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                                                         of the Semantics, a large language ocean.</p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -576,25 +582,26 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="timeline-centered">
+
+                                    <?php foreach ($rowWork as $keyW => $work): ?>
                                     <article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
                                         <div class="timeline-entry-inner">
 
-                                            <div class="timeline-icon color-1">
+                                            <div class="timeline-icon color-<?= $keyW + 1 ?>">
                                                 <i class="icon-pen2"></i>
                                             </div>
 
                                             <div class="timeline-label">
-                                                <h2><a href="#">Full Stack Developer</a> <span>2017-2018</span></h2>
-                                                <p>Tolerably earnestly middleton extremely distrusts she boy now not.
-                                                    Add and offered prepare how cordial two promise. Greatly who affixed
-                                                    suppose but enquire compact prepare all put. Added forth chief trees
-                                                    but rooms think may.</p>
+                                                <h2><a href="#"><?= $work['work_name'] ?></a>
+                                                    <span><?= $work['work_year'] ?></span>
+                                                </h2>
+                                                <p><?= $work['work_desc'] ?></p>
                                             </div>
+
                                         </div>
                                     </article>
-
-
-                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
+                                    <?php endforeach ?>
+                                    <!-- <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
                                         <div class="timeline-entry-inner">
                                             <div class="timeline-icon color-2">
                                                 <i class="icon-pen2"></i>
@@ -641,7 +648,7 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                                         </div>
                                     </article>
 
-                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
+                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
                                         <div class="timeline-entry-inner">
                                             <div class="timeline-icon color-5">
                                                 <i class="icon-pen2"></i>
@@ -654,7 +661,7 @@ $rowData = mysqli_fetch_all($queryData, MYSQLI_ASSOC);
                                                     World of Grammar.</p>
                                             </div>
                                         </div>
-                                    </article>
+                                    </article> -->
 
                                     <article class="timeline-entry begin animate-box"
                                         data-animate-effect="fadeInBottom">

@@ -5,7 +5,7 @@ include 'config/connection_login.php';
 //Jika user menekan tombol Save, lakukan perintah, ambil data dari inputan, email, nama, dan password
 //Masukkan ke dalam tabel user: (nama, email, password) yang nilainya diambil dari masing-masing inputan
 if (isset($_POST['save'])) {
- 
+
     $dataTo = $_POST['data_to'];
     $dataSpeed = $_POST['data_speed'];
     $dataName = $_POST['data_name'];
@@ -63,7 +63,7 @@ if (isset($_POST['edit'])) {
                 value="<?= isset($rowEdit) && isset($rowEdit['data_name']) ? $rowEdit['data_name'] : '' ?>">
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2">
 

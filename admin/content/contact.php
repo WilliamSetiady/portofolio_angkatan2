@@ -34,9 +34,17 @@ if (isset($_GET['delete'])) {
                     <td><?= $data_value['contact_subject']; ?></td>
                     <td><?= $data_value['contact_message']; ?></td>
                     <td>
-                        <a onclick="return confirm('Are you sure?')"
-                            href="?page=contact&delete= <?php echo $data_value['contact_id']; ?>"
-                            class="btn btn-danger btn-sm content-center d-flex justify-content-center">Delete</a>
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="?page=reply&idMessage= <?php echo $data_value['contact_id']; ?>"
+                                    class="btn btn-warning btn-sm content-center d-flex justify-content-center">Reply</a>
+                            </div>
+                            <div class="col-6">
+                                <a onclick="return confirm('Are you sure?')"
+                                    href="?page=contact&delete= <?php echo $data_value['contact_id']; ?>"
+                                    class="btn btn-danger btn-sm content-center d-flex justify-content-center">Delete</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach ?>
